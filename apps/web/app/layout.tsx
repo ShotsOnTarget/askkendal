@@ -5,7 +5,14 @@ import "./globals.css";
 // Display: Archivo at its widest cut reads like civic signage, sturdy and a little playful.
 const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-archivo", display: "swap" });
 // Body: Atkinson Hyperlegible Next, designed for legibility; council text has to work for every reader.
-const atkinson = Atkinson_Hyperlegible_Next({ subsets: ["latin"], variable: "--font-atkinson", display: "swap" });
+// adjustFontFallback is off because Next.js has no size metrics for this font yet (it warns otherwise);
+// the fallback stack in globals.css covers the moment before it loads.
+const atkinson = Atkinson_Hyperlegible_Next({
+  subsets: ["latin"],
+  variable: "--font-atkinson",
+  display: "swap",
+  adjustFontFallback: false,
+});
 
 export const metadata: Metadata = {
   title: { default: "AskKendal", template: "%s · AskKendal" },
