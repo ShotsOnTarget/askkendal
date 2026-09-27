@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/*
+ * AskKendal design tokens: "Auld Grey Town diorama".
+ * Limestone paper and slate ink own the page; Kendal Green is the brand; amber marks
+ * decisions on the map; river blue is reserved for water data. OKLCH throughout.
+ * Radius scale: xs 2px, sm 4px, md 8px. No pills.
+ */
+@theme {
+  --font-display: var(--font-archivo), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-atkinson), "Segoe UI", sans-serif;
+
+  --color-paper: oklch(0.968 0.011 92);
+  --color-paper-2: oklch(0.935 0.014 92);
+  --color-paper-3: oklch(0.895 0.016 92);
+  --color-limestone: oklch(0.83 0.012 95);
+  --color-ink: oklch(0.25 0.022 255);
+  --color-ink-2: oklch(0.4 0.022 255);
+  --color-ink-3: oklch(0.52 0.018 255);
+  --color-slate: oklch(0.45 0.035 255);
+  --color-slate-deep: oklch(0.32 0.035 255);
+
+  --color-kendal: oklch(0.5 0.105 142);
+  --color-kendal-deep: oklch(0.37 0.085 142);
+  --color-kendal-soft: oklch(0.9 0.045 142);
+  --color-amber: oklch(0.78 0.155 72);
+  --color-amber-deep: oklch(0.58 0.13 60);
+  --color-river: oklch(0.6 0.12 240);
+  --color-river-soft: oklch(0.92 0.035 240);
+  --color-alert: oklch(0.56 0.19 28);
+
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  touch-action: manipulation;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+::selection {
+  background: var(--color-kendal-soft);
+  color: var(--color-ink);
+}
+
+/* Paper grain: a faint dot texture so large surfaces are not flat. */
+.paper-grain {
+  background-color: var(--color-paper);
+  background-image: radial-gradient(oklch(0.25 0.02 255 / 0.05) 0.6px, transparent 0.6px);
+  background-size: 6px 6px;
+}
+
+/* Sky behind the floating diorama: fell-top haze fading to limestone. */
+.sky {
+  background:
+    radial-gradient(120% 70% at 70% 0%, oklch(0.9 0.04 225) 0%, transparent 60%),
+    linear-gradient(180deg, oklch(0.93 0.03 225) 0%, oklch(0.955 0.016 95) 62%, oklch(0.93 0.02 90) 100%);
+}
+
+/*
+ * Block surfaces: panels and buttons read as chunky physical blocks with a hard ground
+ * shadow, echoing the voxel town. The signature interaction: buttons sink onto their shadow.
+ */
+.slab {
+  background: var(--color-paper);
+  border-radius: var(--radius-sm);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.7),
+    0 0 0 1px oklch(0.25 0.022 255 / 0.14),
+    0 4px 0 oklch(0.25 0.022 255 / 0.22),
+    0 10px 24px -12px oklch(0.25 0.022 255 / 0.35);
+}
+
+.block-btn {
+  --lift: 3px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 40px;
+  min-width: 40px;
+  padding: 0 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-weight: 600;
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.8),
+    0 0 0 1px oklch(0.25 0.022 255 / 0.18),
+    0 var(--lift) 0 oklch(0.25 0.022 255 / 0.3);
+  transform: translateY(0);
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: 120ms;
+  transition-timing-function: var(--ease-out-quint);
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .block-btn:hover {
+    background: var(--color-paper-2);
+  }
+}
+
+.block-btn:active {
+  transform: translateY(var(--lift));
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.6),
+    0 0 0 1px oklch(0.25 0.022 255 / 0.18),
+    0 0 0 oklch(0.25 0.022 255 / 0.3);
+}
+
+.block-btn[aria-pressed="true"] {
+  background: var(--color-kendal);
+  color: oklch(0.98 0.01 142);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.25),
+    0 0 0 1px oklch(0.3 0.08 142),
+    0 var(--lift) 0 var(--color-kendal-deep);
+}
+
+.block-btn:focus-visible,
+.focus-ring:focus-visible {
+  outline: 3px solid var(--color-amber);
+  outline-offset: 2px;
+}
+
+.block-btn-primary {
+  background: var(--color-kendal);
+  color: oklch(0.98 0.01 142);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.25),
+    0 0 0 1px oklch(0.3 0.08 142),
+    0 var(--lift) 0 var(--color-kendal-deep);
+}
+
+@media (hover: hover) {
+  .block-btn-primary:hover {
+    background: oklch(0.46 0.105 142);
+  }
+}
+
+/* Entrance: panels settle into place once, staggered. */
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.settle {
+  animation: settle 360ms var(--ease-out-quint) both;
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 260ms var(--ease-out-quint) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle,
+  .slide-in-right {
+    animation: none;
+  }
+  .block-btn {
+    transition-duration: 0ms;
+  }
+}
+
+/* Map labels drawn over the canvas. */
+.map-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  color: var(--color-ink);
+  text-shadow:
+    0 0 2px oklch(0.97 0.01 92),
+    0 0 4px oklch(0.97 0.01 92),
+    0 1px 0 oklch(0.97 0.01 92);
+  will-change: transform;
+}
+
+.map-label[data-kind="road"] {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--color-ink-2);
+}
+
+.map-label[data-kind="landmark"] {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.map-label[data-kind="place"] {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-slate-deep);
+}
+
+.map-label[data-kind="water"] {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 600;
+  color: oklch(0.42 0.11 240);
+}
+
+.map-label[data-kind="gauge"] {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: oklch(0.35 0.1 240);
+  background: oklch(0.97 0.01 92 / 0.9);
+  padding: 1px 5px;
+  border-radius: var(--radius-xs);
+  text-shadow: none;
+  box-shadow: 0 0 0 1px oklch(0.6 0.12 240 / 0.5);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* MapLibre controls inherit the paper look. */
+.maplibregl-ctrl-group {
+  border-radius: var(--radius-sm) !important;
+}

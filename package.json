@@ -1,0 +1,31 @@
+{
+  "name": "askkendal",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AskKendal: see what is being decided about Kendal, on a voxel map of the town.",
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @askkendal/web dev",
+    "build": "pnpm --filter @askkendal/web build",
+    "start": "pnpm --filter @askkendal/web start",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "db:generate": "pnpm --filter @askkendal/db generate",
+    "db:migrate": "pnpm --filter @askkendal/db migrate",
+    "ingest": "pnpm --filter @askkendal/ingest ingest",
+    "voxel:build": "pnpm --filter @askkendal/voxel build",
+    "voxel:stats": "pnpm --filter @askkendal/voxel stats",
+    "db:start": "node -e \"require('fs').mkdirSync('.data',{recursive:true})\" && pglite-server --db=./.data/pglite --port=5433 --max-connections=10"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
+    "@electric-sql/pglite-socket": "0.2.11",
+    "@types/node": "^24.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "^5.0.2"
+  }
+}

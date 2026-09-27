@@ -1,0 +1,20 @@
+{
+  "name": "@askkendal/voxel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./mesher": "./src/mesher.ts",
+    "./format": "./src/format.ts",
+    "./constants": "./src/constants.ts",
+    "./project": "./src/project.ts",
+    "./gazetteer": "./data/gazetteer.json"
+  },
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "stats": "tsx src/stats.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  }
+}

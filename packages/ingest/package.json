@@ -1,0 +1,23 @@
+{
+  "name": "@askkendal/ingest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./river": "./src/sources/ea-flood.ts",
+    "./publicity": "./src/publicity.ts"
+  },
+  "scripts": {
+    "ingest": "tsx src/cli.ts",
+    "test": "vitest run",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@askkendal/ai": "workspace:*",
+    "@askkendal/db": "workspace:*",
+    "@askkendal/voxel": "workspace:*",
+    "cheerio": "^1.2.0",
+    "drizzle-orm": "^0.45.3"
+  }
+}

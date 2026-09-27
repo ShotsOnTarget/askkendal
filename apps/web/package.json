@@ -1,0 +1,36 @@
+{
+  "name": "@askkendal/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "predev": "node scripts/copy-maplibre-worker.mjs",
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "tsc -p . --noEmit",
+    "prebuild": "node scripts/copy-maplibre-worker.mjs"
+  },
+  "dependencies": {
+    "@askkendal/ai": "workspace:*",
+    "@askkendal/db": "workspace:*",
+    "@askkendal/ingest": "workspace:*",
+    "@askkendal/voxel": "workspace:*",
+    "drizzle-orm": "^0.45.3",
+    "maplibre-gl": "^6.11.2",
+    "next": "16.3.6",
+    "nodemailer": "^10.0.11",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "tailwindcss": "^4.3.3"
+  }
+}
